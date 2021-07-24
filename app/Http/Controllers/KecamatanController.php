@@ -9,7 +9,7 @@ class KecamatanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:1']);
+        $this->middleware(['auth']);
     }
     /**
      * Display a listing of the resource.

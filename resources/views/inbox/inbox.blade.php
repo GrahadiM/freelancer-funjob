@@ -36,7 +36,8 @@ Chatbox Application
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>
-                                            <a href="{{ route('pesan.person', $user->id) }}">Chat</a>
+                                            {{-- <a href="{{ route('pesan.person', $user->id) }}">Chat</a> --}}
+                                            <a href="http://wa.me/{{ $user->phone }}">Chat</a>
                                         </td>
                                     </tr>
                                     @endif

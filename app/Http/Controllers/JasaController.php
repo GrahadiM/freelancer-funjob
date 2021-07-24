@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\KategoriJasa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class JasaController extends Controller
@@ -46,7 +47,6 @@ class JasaController extends Controller
             'name' => 'required',
             'user_id' => 'required',
             'kategori_id' => 'required',
-            // 'image' => 'nullable|image|mimes:jpg,png,jpeg',
             'price' => 'required',
             'desc' => 'required',
         ]);
@@ -100,17 +100,29 @@ class JasaController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            "image" => "mimes:jpeg,jpg,png",
             'status' => 'required',
             'desc' => 'required',
         ]);
 
         $jasa = Jasa::find($jasa->id);
-        $jasa->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'status' => $request->status,
-            'desc' => $request->desc,
-        ]);
+        
+        if ($request->hasFile("image")) {
+            $file = $request->file("image");
+            $filename = time() . "." . $file->getClientOriginalExtension();
+
+            $file->move('image/jasa', $filename);
+
+            File::delete('image/jasa' . $jasa->image);
+
+            $jasa->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => $filename,
+                'status' => $request->status,
+                'desc' => $request->desc,
+            ]);
+        }
         return redirect()->route('jasa.index');
     }
 

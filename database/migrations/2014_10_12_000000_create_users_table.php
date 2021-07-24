@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->bigInteger('role_id');
             $table->bigInteger('status_id');
-            $table->string('phone');
-            $table->string('gender');
+            $table->string('phone')->nullable();
+            $table->string('gender')->nullable();
             $table->string('image')->nullable();
             $table->bigInteger('kota_id')->nullable();
             $table->bigInteger('kecamatan_id')->nullable();

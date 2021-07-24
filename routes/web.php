@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {return redirect()->route('login');});
 //HTTP 403
 Route::get('/403', function () {return view('errors.403');})->name('403');
 //HTTP 419
@@ -28,7 +29,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //Route Admin dan Arsitek
     Route::group(['middleware' => ['auth', 'role:1,2']], function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-        // Route::get('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout'])->name('logout');
         Route::resource('/profile', App\Http\Controllers\ProfileController::class, ['only' => ['index', 'update']]);
         Route::resource('jasa', App\Http\Controllers\JasaController::class);
         Route::resource('pesanan', App\Http\Controllers\PesananController::class);

@@ -43,11 +43,11 @@
           <div class="card-body">
             <div class="card-title">Update Jasa</div>
             <hr>
-            <form action="{{ route('jasa.update', $jasa->id) }}" method="POST">
+            <form action="{{ route('jasa.update', $jasa->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-9">
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" name="name" class="form-control form-control-rounded" id="name" value="{{ $jasa->name }}">
@@ -69,7 +69,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
+                      <label for="image">Masukkan Foto Profile</label>
+                      <div class="form-group">
+                        <input name="image" type="file" class="form-control-file" id="image">
+                        <img alt="image" src="{{ asset('image/jasa/' . $jasa->image) }}" class="img-fluid" style="width: 200px; margin-top: 1rem;">
+                      </div>
+                      <p class="text-danger">{{ $errors->first("image") }}</p>
                     </div>
                 </div>
                 <div class="form-group d-flex justify-content-center mt-3">

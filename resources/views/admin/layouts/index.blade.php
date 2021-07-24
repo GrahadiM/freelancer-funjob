@@ -36,9 +36,6 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item {{ Request::is('profile*') ? 'active' : ''}}" href="{{ url('/profile') }}"><i data-feather="user"></i> Account</a>
                                 {{-- <a class="dropdown-item" href="#"><i data-feather="mail"></i> Messages</a> --}}
-                                @if (auth()->user()->role_id == 1)
-                                    <a class="dropdown-item {{ Request::is('setting*') ? 'active' : ''}}" href="#"><i data-feather="settings"></i> Settings</a>
-                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
